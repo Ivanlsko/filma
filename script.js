@@ -17,7 +17,7 @@ const sprievodca = document.querySelector(".sprievodca");
 btnSprievodca.addEventListener("click", openSprievodca);
 
 function openSprievodca() {
-  sprievodca.toggle(".hidden");
+  sprievodca.classList.toggle("hidden");
 }
 
 
