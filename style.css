@@ -1,0 +1,145 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
+
+html {
+  background-image: linear-gradient(
+    to right,
+    rgba(53, 50, 60, 1),
+    rgba(89, 88, 94, 1)
+  );
+  font-family: "roboto";
+}
+body {
+  margin: 2vw 2.847vw;
+}
+
+header {
+  display: flex;
+  align-items: center;
+}
+
+header > img {
+  box-sizing: border-box;
+  width: 16.111vw;
+  height: 4.306vw;
+  margin: 0vw 2vw;
+}
+h1 {
+  font-size: 1.3em;
+  color: #77c59e;
+}
+
+h2 {
+  font-size: 1.1em;
+  color: rgb(230, 228, 228);
+  font-weight: 300;
+  margin-top: -0.3vw;
+}
+main {
+  display: flex;
+  position: relative;
+  margin-top: 2vw;
+}
+main > * {
+  border: none;
+  border-radius: 20px;
+}
+
+iframe {
+  display: block;
+}
+
+#frameCall {
+  width: 78.264vw;
+  min-height: 100%;
+  margin-right: 3.65vw;
+}
+
+#frameCliquer {
+  width: 19vw;
+  height: 40.3vw;
+}
+
+header {
+  width: 100%;
+  height: 6.944vw;
+  border-radius: 20px;
+  background-image: linear-gradient(
+    to right,
+    rgba(19, 19, 19, 1),
+    rgba(57, 57, 57, 1)
+  );
+}
+
+footer {
+  display: flex;
+  justify-content: center;
+  margin-top: 2vw;
+  align-items: center;
+}
+
+.btn {
+  padding: 0vw 1.7vw;
+  display: flex;
+  background-color: #141414;
+  color: white;
+  border-radius: 45px;
+  margin-right: 1vw;
+  height: 3.7vw;
+  justify-content: center;
+  align-items: center;
+}
+
+.btn > img {
+  margin-right: 1vw;
+}
+
+h3 {
+  font-weight: 300;
+  font-size: 0.9em;
+}
+
+.sprievodca {
+  background-color: #141414;
+  display: grid;
+  grid-template-columns: 1fr 5fr 1fr;
+  margin-right: auto;
+  border-radius: 20px;
+  width: 30vw;
+  height: 5vw;
+}
+.sprievodca > img {
+  margin-top: 1vw;
+}
+.sprievodca > img,
+p {
+  align-self: center;
+  justify-self: center;
+}
+.podpora {
+  background-color: #141414;
+  border-radius: 20px;
+  width: 30vw;
+  height: 5vw;
+  margin-left: auto;
+}
+
+.positions {
+  display: flex;
+  grid-row: 2;
+  grid-column-start: 2;
+  justify-self: center;
+  justify-content: space-between;
+  width: 5vw;
+}
+
+.position {
+  width: 0.8vw;
+  height: 0.8vw;
+  border-radius: 50px;
+  background-color: blanchedalmond;
+  grid-area: "2, 2";
+}
+
+.hidden {
+  visibility: hidden;
+}

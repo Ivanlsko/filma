@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+  <head runat="server">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      http-equiv="Access-Control-Allow-Origin"
+      content="https://advanced.vmixcall.com/call.htm?Key=4964159420&Name=Kristufkova"
+    />
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+      #frameCliquer {
+        height: 40vw;
+      }
+      .col-container {
+        display: table;
+        width: 100%;
+      }
+      .col {
+        display: table-cell;
+        padding: 16px;
+      }
+
+      @media only screen and (max-width: 1300px) {
+        #frameCliquer {
+          margin-top: 15px;
+        }
+      }
+
+      @media only screen and (max-width: 900px) {
+        .col {
+          display: block;
+          width: 100%;
+        }
+
+        #colCliquer {
+          display: flex;
+          justify-content: center;
+        }
+
+        #frameCliquer {
+          margin-top: -17px;
+          width: 100vw;
+          height: 19vw;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="col-container">
+      <div class="col" style="background-color: #aaa">
+        <h3>
+          Online webinár - vitajte v online rozhraní pre prednášajúceho.
+          Nezabudnite povoliť použitie kamery a mikrofónu.
+        </h3>
+        <div style="padding: 56.25% 0 0 0; position: relative">
+          <iframe
+            id="frameCall"
+            src="https://advanced.vmixcall.com/call.htm?Key=4964159420&Name=Kristufkova"
+            frameborder="0"
+            allow="camera;microphone;fullscreen"
+            allowfullscreen
+            style="
+              position: absolute;
+              top: 0;
+              left: 0;
+              width: 100%;
+              height: 100%;
+            "
+          ></iframe>
+        </div>
+      </div>
+
+      <div id="colCliquer" class="col" style="background-color: #bbb">
+        <h2><font color="#bbb">.</font></h2>
+        <iframe
+          id="frameCliquer"
+          src="https://cliqer.pro/774312/Kristufkova"
+          height="100%"
+          width="100%"
+          frameborder="0"
+        ></iframe>
+      </div>
+    </div>
+
+    <p>
+      Vašu prezentáciu môžete ovládať kliknutím na šípky v pravej časti
+      obrazovky. <br />Odporúčame Vám vypnúť si lokálny náhľad vašej kamery (3.
+      tlačidlo sprava "Toggle Camera Preview") <br />V prípade, že vám niektorá
+      súčasť nefunguje, alebo ste ukončili hovor, obnovte, prosím, stránku
+      kliknutím na tlačidlo F5 na klávesnici.
+    </p>
+
+    <img
+      src="http://bodka.tv/call/logo_filma_transparent_small.png"
+      style="height: 40px"
+    />
+  </body>
+</html>

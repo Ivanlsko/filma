@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+
+<html>
+  <head id="Head1" runat="server">
+    <title>vMix Call - Advanced</title>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, minimum-scale=1.0, user-scalable=no"
+    />
+
+    <link rel="stylesheet" type="text/css" href="css/jquery-ui.min.css" />
+    <link rel="stylesheet" type="text/css" href="css/styles.css" />
+
+    <script type="text/javascript" src="js/jquery-3.5.0.min.js"></script>
+    <script type="text/javascript" src="js/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="js/jquery.ui.touch-punch.js"></script>
+    <script type="text/javascript" src="js/scripts.js"></script>
+
+    <script src="js/adapter.js" type="text/javascript"></script>
+    <script src="js/vMixCall.js" type="text/javascript"></script>
+    <script src="js/webrtc-devices.js" type="text/javascript"></script>
+  </head>
+  <body>
+    <form id="form2" runat="server"></form>
+    <script type="text/javascript">
+      var queryVars = vMixCallGetUrlVars();
+      var key = queryVars["Key"];
+      var name = decodeURIComponent(queryVars["Name"]);
+      var auth = "";
+      var session;
+    </script>
+
+    <div id="video-wrapper">
+      <video id="remoteVideo" autoplay muted playsinline></video>
+
+      <div id="user-video" ondblclick="session.switchCamera();">
+        <video id="localVideo" autoplay muted playsinline></video>
+      </div>
+      <div id="video-drag">
+        <div id="video-controls">
+          <div
+            id="control-phone"
+            class="controls-item"
+            onclick="if (confirm('Are you sure you wish to end the call?')) session.endCall();"
+            title="End Call"
+          >
+            <svg
+              version="1.1"
+              xmlns="http://www.w3.org/2000/svg"
+              xmlns:xlink="http://www.w3.org/1999/xlink"
+              x="0px"
+              y="0px"
+              width="476.034px"
+              height="588.888px"
+              viewBox="53.561 49.034 476.034 588.888"
+              enable-background="new 53.561 49.034 476.034 588.888"
+              xml:space="preserve"
+            >
+              <g>
+                <g>
+                  <path
+                    d="M349.694,466.335c-7.146-0.571-13.027-5.158-18.909-9.744c-53.63-44.409-96.036-102.055-121.624-166.588
+							c-4.82-11.047-8.763-23.761-4.48-35.123c7.78-21.646,37.424-25.821,49.124-45.616c10.629-16.954,4.022-39.154-5.118-56.946
+							c-15.038-29.619-35.943-56.583-61.338-78.252c-12.159-10.444-25.687-19.906-41.353-23.688
+							C75.499,35.17,51.883,153.148,53.653,201.097c2.068,49.808,18.812,98.409,40.346,143.575
+							C144.54,451.915,222.165,548.53,326.222,605.451c36.547,19.884,76.9,34.962,118.389,32.128
+							c20.744-1.414,40.989-7.137,57.597-20.091c16.513-12.367,27.625-32.259,27.384-52.81c-0.146-21.139-11.538-39.903-23.224-56.905
+							c-17.083-24.524-36.9-47.089-58.869-67.591c-4.216-3.709-8.433-7.419-13.621-8.876c-5.777-1.552-11.548,0.516-17.316,2.583
+							c-16.036,5.81-31.188,13.575-44.771,22.805c-6.154,4.418-12.897,8.738-20.141,8.754
+							C350.965,465.941,350.281,466.432,349.694,466.335z"
+                  />
+                </g>
+              </g>
+            </svg>
+          </div>
+          <div id="control-chat" class="controls-item" title="Show/Hide Chat">
+            <svg
+              version="1.1"
+              xmlns="http://www.w3.org/2000/svg"
+              xmlns:xlink="http://www.w3.org/1999/xlink"
+              x="0px"
+              y="0px"
+              width="379.34px"
+              height="328.5px"
+              viewBox="78 230.377 379.34 328.5"
+              enable-background="new 78 230.377 379.34 328.5"
+              xml:space="preserve"
+            >
+              <path
+                d="M397.053,230.377H138.287C104.979,230.41,77.996,257.422,78,290.73v135.54c-0.067,31.772,24.601,58.111,56.309,60.124
+					v67.015c0,6.112,2.964,7.306,6.831,2.541l55.723-69.223h200.191c33.296,0,60.286-27.161,60.286-60.457V290.73
+					C457.344,257.422,430.361,230.41,397.053,230.377z"
+              />
+            </svg>
+          </div>
+          <div
+            class="controls-item"
+            id="control-camera"
+            onclick="session.toggleCamera();"
+            title="Mute/Unmute Camera"
+          >
+            <svg
+              version="1.1"
+              xmlns="http://www.w3.org/2000/svg"
+              xmlns:xlink="http://www.w3.org/1999/xlink"
+              x="0px"
+              y="0px"
+              width="547.658px"
+              height="316.69px"
+              viewBox="25.216 186.19 547.658 316.69"
+              enable-background="new 25.216 186.19 547.658 316.69"
+              xml:space="preserve"
+            >
+              <path
+                d="M544.896,221.906c-4.763,0-9.524,1.19-13.691,3.572l-123.817,71.435v-68.458c0-23.217-19.051-42.266-42.267-42.266H67.481
+					c-23.216,0-42.266,19.049-42.266,42.266v232.158c0,23.217,19.05,42.267,42.266,42.267h297.64c23.216,0,42.267-19.05,42.267-42.267
+					v-69.052l123.817,71.434c13.691,7.738,30.358,2.978,38.099-10.119c2.381-4.168,3.57-8.93,3.57-13.691v-189.3
+					C572.873,234.408,560.372,221.906,544.896,221.906z"
+              />
+            </svg>
+            <svg
+              version="1.1"
+              class="svg-strike"
+              xmlns="http://www.w3.org/2000/svg"
+              xmlns:xlink="http://www.w3.org/1999/xlink"
+              x="0px"
+              y="0px"
+              width="277.627px"
+              height="352.142px"
+              viewBox="42.169 2.044 277.627 352.142"
+              enable-background="new 42.169 2.044 277.627 352.142"
+              xml:space="preserve"
+            >
+              <path
+                d="M317.5,321.587c4.105,5.431,3.182,20.815-6.672,28.265l0,0c-9.854,7.449-24.908,4.143-29.014-1.289
+					L44.433,34.549c-4.106-5.432-3.066-20.664,6.788-28.112l0,0c9.854-7.449,24.791-4.296,28.898,1.136L317.5,321.587z"
+              />
+              <path
+                d="M303.28,320.115c3.869,5.119,2.858,12.406-2.262,16.276l0,0c-5.12,3.87-12.407,2.857-16.276-2.262L57.716,33.814
+					c-3.87-5.119-2.857-12.406,2.261-16.276l0,0c5.12-3.871,12.407-2.857,16.276,2.262L303.28,320.115z"
+              />
+            </svg>
+          </div>
+          <div
+            class="controls-item"
+            id="control-microphone"
+            onclick="session.toggleMicrophone();"
+            title="Mute/Unmute Microphone"
+          >
+            <svg
+              version="1.1"
+              xmlns="http://www.w3.org/2000/svg"
+              xmlns:xlink="http://www.w3.org/1999/xlink"
+              x="0px"
+              y="0px"
+              width="285.732px"
+              height="416.695px"
+              viewBox="154.775 138.187 285.732 416.695"
+              enable-background="new 154.775 138.187 285.732 416.695"
+              xml:space="preserve"
+            >
+              <g>
+                <path
+                  d="M297.64,432.256c45.837,0,83.339-37.503,83.339-83.341v-127.39c0-45.837-37.502-83.339-83.339-83.339
+						c-45.836,0-83.339,37.502-83.339,83.339v127.39C214.301,394.753,251.804,432.256,297.64,432.256z"
+                />
+                <path
+                  d="M440.508,345.344V294.15c0-10.12-7.738-17.857-17.858-17.857s-17.858,7.738-17.858,17.857v51.194
+						c0,58.933-48.218,107.15-107.149,107.15c-58.933,0-107.15-48.218-107.15-107.15V294.15c0-10.12-7.738-17.857-17.858-17.857
+						c-10.118,0-17.857,7.738-17.857,17.857v51.194c0,72.625,54.766,132.748,125.009,141.677v32.145h-68.457
+						c-10.12,0-17.857,7.739-17.857,17.858c0,10.12,7.737,17.858,17.857,17.858h172.036c10.119,0,17.858-7.738,17.858-17.858
+						c0-10.119-7.739-17.858-17.858-17.858h-67.862v-32.145C385.741,478.092,440.508,417.969,440.508,345.344z"
+                />
+              </g>
+            </svg>
+            <svg
+              class="svg-strike"
+              version="1.1"
+              xmlns="http://www.w3.org/2000/svg"
+              xmlns:xlink="http://www.w3.org/1999/xlink"
+              x="0px"
+              y="0px"
+              width="277.627px"
+              height="352.142px"
+              viewBox="42.169 2.044 277.627 352.142"
+              enable-background="new 42.169 2.044 277.627 352.142"
+              xml:space="preserve"
+            >
+              <path
+                d="M317.5,321.587c4.105,5.431,3.182,20.815-6.672,28.265l0,0c-9.854,7.449-24.908,4.143-29.014-1.289
+					L44.433,34.549c-4.106-5.432-3.066-20.664,6.788-28.112l0,0c9.854-7.449,24.791-4.296,28.898,1.136L317.5,321.587z"
+              />
+              <path
+                d="M303.28,320.115c3.869,5.119,2.858,12.406-2.262,16.276l0,0c-5.12,3.87-12.407,2.857-16.276-2.262L57.716,33.814
+					c-3.87-5.119-2.857-12.406,2.261-16.276l0,0c5.12-3.871,12.407-2.857,16.276,2.262L303.28,320.115z"
+              />
+            </svg>
+          </div>
+          <div
+            id="control-screen"
+            class="controls-item"
+            onclick="session.switchCamera();"
+            title="Toggle Screen Sharing"
+          >
+            <svg
+              xmlns:dc="http://purl.org/dc/elements/1.1/"
+              xmlns:cc="http://creativecommons.org/ns#"
+              xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+              xmlns:svg="http://www.w3.org/2000/svg"
+              xmlns="http://www.w3.org/2000/svg"
+              id="svg3719"
+              version="1.1"
+              viewBox="0 0 256 256"
+              height="256mm"
+              width="256mm"
+            >
+              <g
+                inkscape:label="Layer 1"
+                inkscape:groupmode="layer"
+                id="layer1"
+                transform="translate(0,-41)"
+              >
+                <rect
+                  id="rect3721"
+                  width="232.00558"
+                  height="146.39807"
+                  x="12.614285"
+                  y="69.557587"
+                  style="
+                    fill: none;
+                    stroke-width: 19.78255463;
+                    stroke-miterlimit: 4;
+                    stroke-dasharray: none;
+                    stroke-opacity: 1;
+                  "
+                />
+                <rect
+                  id="rect3723"
+                  width="55.184521"
+                  height="30.994051"
+                  x="100.76846"
+                  y="224.05035"
+                  style="stroke-width: 0.27851814"
+                  ry="1.259773e-13"
+                />
+                <rect
+                  id="rect3725"
+                  width="136.82739"
+                  height="32.505951"
+                  x="59.947014"
+                  y="252.77655"
+                  ry="1.5769482e-13"
+                  style="stroke-width: 0.3116132"
+                />
+              </g>
+            </svg>
+          </div>
+          <div
+            id="control-camerapreview"
+            class="controls-item"
+            onclick="$('#user-video').toggle();"
+            title="Toggle Camera Preview"
+          >
+            <svg version="1.1">
+              <g>
+                <rect
+                  style="
+                    fill-opacity: 0;
+                    fill-rule: nonzero;
+                    stroke-width: 15%;
+                    stroke-linecap: butt;
+                    stroke-linejoin: miter;
+                    stroke-miterlimit: 4;
+                    stroke-opacity: 1;
+                    stroke-dasharray: none;
+                    stroke-dashoffset: 12;
+                  "
+                  id="rect2985"
+                  width="100%"
+                  height="80%"
+                  x="0"
+                  y="10%"
+                />
+              </g>
+            </svg>
+            <svg
+              class="svg-strike"
+              version="1.1"
+              xmlns="http://www.w3.org/2000/svg"
+              xmlns:xlink="http://www.w3.org/1999/xlink"
+              x="0px"
+              y="0px"
+              width="277.627px"
+              height="352.142px"
+              viewBox="42.169 2.044 277.627 352.142"
+              enable-background="new 42.169 2.044 277.627 352.142"
+              xml:space="preserve"
+            >
+              <path
+                d="M317.5,321.587c4.105,5.431,3.182,20.815-6.672,28.265l0,0c-9.854,7.449-24.908,4.143-29.014-1.289
+					L44.433,34.549c-4.106-5.432-3.066-20.664,6.788-28.112l0,0c9.854-7.449,24.791-4.296,28.898,1.136L317.5,321.587z"
+              />
+              <path
+                d="M303.28,320.115c3.869,5.119,2.858,12.406-2.262,16.276l0,0c-5.12,3.87-12.407,2.857-16.276-2.262L57.716,33.814
+					c-3.87-5.119-2.857-12.406,2.261-16.276l0,0c5.12-3.871,12.407-2.857,16.276,2.262L303.28,320.115z"
+              />
+            </svg>
+          </div>
+          <div
+            id="control-fullscreen"
+            class="controls-item"
+            onclick="toggleFullScreen(document.body)"
+            title="Toggle Fullscreen"
+          >
+            <svg
+              version="1.1"
+              xmlns="http://www.w3.org/2000/svg"
+              xmlns:xlink="http://www.w3.org/1999/xlink"
+              x="0px"
+              y="0px"
+              width="595.278px"
+              height="595.28px"
+              viewBox="0 48.895 595.278 595.28"
+              enable-background="new 0 48.895 595.278 595.28"
+              xml:space="preserve"
+            >
+              <g>
+                <path
+                  d="M292.038,251.522l101.275-101.269l-89.27-63.059l291.234-38.3L556.99,340.124l-63.062-89.25l-101.28,101.263
+						L292.038,251.522z M202.633,340.939L101.353,442.196l-63.06-89.25L0,644.175l291.234-38.301l-89.262-63.053l101.273-101.273
+						L202.633,340.939z"
+                />
+              </g>
+            </svg>
+          </div>
+
+          <div
+            id="control-settings"
+            class="controls-item"
+            onclick="vMixCallShowSettings();"
+            title="Open Settings"
+          >
+            <svg
+              version="1.1"
+              xmlns="http://www.w3.org/2000/svg"
+              xmlns:xlink="http://www.w3.org/1999/xlink"
+              x="0px"
+              y="0px"
+              width="500px"
+              height="500px"
+              viewBox="53.561 49.034 476.034 588.888"
+              enable-background="new 53.561 49.034 476.034 588.888"
+              xml:space="preserve"
+            >
+              <g
+                id="g3027"
+                transform="matrix(0.32552083,0,0,-0.32552083,53.561,507.36734)"
+              >
+                <path
+                  id="path3029"
+                  d="m 1024,640 q 0,106 -75,181 -75,75 -181,75 -106,0 -181,-75 -75,-75 -75,-181 0,-106 75,-181 75,-75 181,-75 106,0 181,75 75,75 75,181 z m 512,109 V 527 q 0,-12 -8,-23 -8,-11 -20,-13 l -185,-28 q -19,-54 -39,-91 35,-50 107,-138 10,-12 10,-25 0,-13 -9,-23 -27,-37 -99,-108 -72,-71 -94,-71 -12,0 -26,9 l -138,108 q -44,-23 -91,-38 -16,-136 -29,-186 -7,-28 -36,-28 H 657 q -14,0 -24.5,8.5 Q 622,-111 621,-98 L 593,86 q -49,16 -90,37 L 362,16 Q 352,7 337,7 323,7 312,18 186,132 147,186 q -7,10 -7,23 0,12 8,23 15,21 51,66.5 36,45.5 54,70.5 -27,50 -41,99 L 29,495 Q 16,497 8,507.5 0,518 0,531 v 222 q 0,12 8,23 8,11 19,13 l 186,28 q 14,46 39,92 -40,57 -107,138 -10,12 -10,24 0,10 9,23 26,36 98.5,107.5 72.5,71.5 94.5,71.5 13,0 26,-10 l 138,-107 q 44,23 91,38 16,136 29,186 7,28 36,28 h 222 q 14,0 24.5,-8.5 Q 914,1391 915,1378 l 28,-184 q 49,-16 90,-37 l 142,107 q 9,9 24,9 13,0 25,-10 129,-119 165,-170 7,-8 7,-22 0,-12 -8,-23 -15,-21 -51,-66.5 -36,-45.5 -54,-70.5 26,-50 41,-98 l 183,-28 q 13,-2 21,-12.5 8,-10.5 8,-23.5 z"
+                />
+              </g>
+            </svg>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="video-chat" class="active">
+      <div id="chat-wrapper">
+        <div id="messages-wrapper"></div>
+        <textarea id="chat-write" name="chat-write"></textarea>
+      </div>
+    </div>
+
+    <audio id="remoteAudio" autoplay></audio>
+
+    <div
+      id="connectionfailed-error"
+      title="Unable to connect"
+      style="display: none"
+    >
+      <p>
+        Sorry, the Host has disconnected or we were unable to connect to the
+        Call.<br />
+        <br />
+        Click OK to attempt to reconnect.
+      </p>
+    </div>
+
+    <div id="errorBox" style="display: none"></div>
+
+    <div id="callSettings" title="Settings" style="display: none">
+      <table style="width: 100%">
+        <tr>
+          <td>Camera</td>
+          <td>
+            <select id="cboCamera" style="width: 200px"></select>
+          </td>
+        </tr>
+        <tr>
+          <td>Microphone</td>
+          <td>
+            <select id="cboMicrophone" style="width: 200px"></select>
+          </td>
+        </tr>
+        <tr>
+          <td>Echo Cancellation</td>
+          <td><input type="checkbox" id="chkEchoCancellation" checked /></td>
+        </tr>
+        <tr>
+          <td>Auto Gain</td>
+          <td><input type="checkbox" id="chkAutoGain" checked /></td>
+        </tr>
+        <tr>
+          <td>Force Stereo</td>
+          <td><input type="checkbox" id="chkStereo" /></td>
+        </tr>
+      </table>
+    </div>
+
+    <script type="text/javascript">
+      function beginCall(videoInputId, audioInputId) {
+        $.get(vMixCallBaseUri + "publicip.ashx", null, function (ip) {
+          auth = ip;
+          $.get(
+            vMixCallBaseUri + "turn.ashx?Array=1&STUN=1&Key=" + key,
+            null,
+            function (turnServers) {
+              if (session) {
+                session.close();
+              }
+              session = new vMixCall(
+                key,
+                auth,
+                name,
+                false,
+                document.getElementById("localVideo"),
+                document.getElementById("remoteVideo"),
+                document.getElementById("remoteAudio"),
+                document.getElementById("messages-wrapper"),
+                turnServers
+              );
+              session.start();
+            }
+          ).fail(function () {
+            vMixCallDisplayError(
+              "Error",
+              "Could not retrieve vMix Call TURN servers."
+            );
+          });
+          $("#chat-write").on("keypress", function (e) {
+            if (e.keyCode == 13 && !e.shiftKey) {
+              e.preventDefault();
+              session.sendChat(this.value);
+              this.value = "";
+            }
+          });
+        }).fail(function () {
+          vMixCallDisplayError(
+            "Error",
+            "Could not connect to vMix Call server."
+          );
+        });
+      }
+
+      beginCall();
+      $(document).tooltip();
+      $("#video-chat").removeClass("active");
+    </script>
+  </body>
+</html>
