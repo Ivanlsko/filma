@@ -12,11 +12,12 @@ function logIt() {
 }
 
 const btnSprievodca = document.querySelector(".btnSprievodca");
+const sprievodca = document.querySelector(".sprievodca");
 
-btnSprievodca.addEventListener("click", skuska);
+btnSprievodca.addEventListener("click", openSprievodca);
 
-function skuska() {
-  console.log("idze?");
+function openSprievodca() {
+  sprievodca.toggle(".hidden");
 }
 
 
