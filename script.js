@@ -20,5 +20,7 @@ function openSprievodca() {
   sprievodca.classList.toggle("hidden");
 }
 
+const sprievodcaContent = document.querySelector(".sprievodcaContent");
+sprievodcaContent.textContent = sprievodcaText[0];
 
 
