@@ -21,6 +21,15 @@ function openSprievodca() {
 }
 
 const sprievodcaContent = document.querySelector(".sprievodcaContent");
-sprievodcaContent.textContent = sprievodcaText[0];
+let position = 0;
+sprievodcaContent.textContent = sprievodcaText[position];
 
+const next = document.querySelector(".nextPos");
+
+next.addEventListener("click", nextPos);
+
+function nextPos() {
+  sprievodcaContent.textContent = sprievodcaText[position + 1];
+  position = position + 1;
+};
 
