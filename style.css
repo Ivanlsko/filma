@@ -69,13 +69,13 @@ header {
     rgba(57, 57, 57, 1)
   );
 }
-
 footer {
-  display: flex;
-  justify-content: center;
-  margin-top: 2vw;
-  align-items: center;
-}
+display: grid;
+justify-content: center;
+margin-top: 2vw;
+align-items: center;
+grid-template-columns: 3fr 1fr 1fr 1fr 3fr;
+gap: 1vw; }
 
 .btn {
   padding: 0vw 1.7vw;
@@ -83,7 +83,7 @@ footer {
   background-color: #141414;
   color: white;
   border-radius: 45px;
-  margin-right: 1vw;
+
   height: 3.7vw;
   justify-content: center;
   align-items: center;
@@ -104,8 +104,7 @@ h3 {
   grid-template-columns: 1fr 5fr 1fr;
   margin-right: auto;
   border-radius: 20px;
-  width: 30vw;
-  height: 5vw;
+  padding: 1vw 0vw;
 }
 .sprievodca > img {
   margin-top: 1vw;
@@ -118,9 +117,7 @@ p {
 .podpora {
   background-color: #141414;
   border-radius: 20px;
-  width: 30vw;
-  height: 5vw;
-  margin-left: auto;
+  padding: 1vw 0vw;
 }
 
 .positions {
@@ -142,4 +139,10 @@ p {
 
 .hidden {
   visibility: hidden;
+}
+
+.sprievodcaContent {
+ color: white;
+ font-size: 0.9em;
+ font-weight: 300;
 }
