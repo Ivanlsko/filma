@@ -127,14 +127,19 @@ p {
   justify-self: center;
   justify-content: space-between;
   width: 5vw;
+  align-items: center;
 }
 
-.position {
-  width: 0.8vw;
-  height: 0.8vw;
+.positionFull {
+  background-color: white;
+}
+
+.positionEmpty {
+  width: 0.42vw;
+  height: 0.42vw;
   border-radius: 50px;
-  background-color: blanchedalmond;
-  grid-area: "2, 2";
+  background-color: none;
+  border: solid 0.15vw white;
 }
 
 .hidden {
