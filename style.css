@@ -81,7 +81,7 @@ h2 {
   grid-template-columns: 1fr 0.8fr 0.9fr;
   gap: 1vw;
   position: relative;
-  opacity: 1;
+  z-index: 2;
 }
 
 .btn {
@@ -104,6 +104,65 @@ h2 {
 h3 {
   font-weight: 300;
   font-size: 1em;
+}
+
+.rightToLeftSprievodca {
+  position: relative;
+  z-index: 2;
+  animation: RTLsprievodca 300ms ease-in forwards;
+}
+
+@keyframes RTLsprievodca {
+  100% {
+    margin-left: 21.3vw;
+    margin-right: -21.3vw;
+  }
+}
+
+.rightToLeftNahrat {
+  position: relative;
+  z-index: 1;
+  animation: RTLnahrat 300ms ease-in forwards;
+}
+
+@keyframes RTLnahrat {
+  100% {
+    margin-left: 11vw;
+    margin-right: -11vw;
+  }
+}
+
+.opacityZero {
+  animation: opacityZero 300ms ease-in forwards;
+}
+
+@keyframes opacityZero {
+  60% {
+    opacity: 0.7;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+.opacityOne {
+  animation: opacityOne 300ms ease-in forwards;
+}
+
+@keyframes opacityOne {
+  60% {
+    opacity: 0.3;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.btnZavriet {
+  position: absolute;
+  z-index: 0;
+  right: 3vw;
+  opacity: 0;
 }
 
 /*Main*/ /*Main*/ /*Main*/ /*Main*/
