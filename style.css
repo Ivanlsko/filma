@@ -158,6 +158,8 @@ h3 {
   }
 }
 
+/*Header after clicked*/ /*Header after clicked*/ /*Header after clicked*/
+
 .btnZavriet {
   position: absolute;
   z-index: 0;
@@ -165,6 +167,22 @@ h3 {
   opacity: 0;
 }
 
+#secondaryBg {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #141414;
+}
+
+#secondaryBg > img {
+  width: 1vw;
+  margin: 0vw 7vw;
+}
+
+a {
+  color: black;
+  font-weight: 500;
+}
 /*Main*/ /*Main*/ /*Main*/ /*Main*/
 
 main {

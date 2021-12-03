@@ -12,25 +12,34 @@ buttons.forEach((button) => {
 });
 
 function determineBtn() {
-  //console.log(this);
+  secHeaderContentDisplayNone();
+
+  console.log(this.innerText);
   if (this.innerText == "sprievodca") {
     sprievodca();
-    manageContent();
   }
 
   if (this.innerText == "nahrať") {
     nahrať();
-    manageContent();
   }
 
   if (this.innerText == "podpora") {
+    console.log("podmienka podpora");
     podpora();
-    manageContent();
   }
 
   if (this.innerText == "zavrieť") {
     zavrieť();
-    manageContent();
+  }
+  manageHeaderContent();
+}
+
+function secHeaderContentDisplayNone() {
+  const childrens = document.querySelector("#secondaryBg").children;
+  // used "for" instead of forEach bechause of HTMLcollection
+  for (let i = 0; i < childrens.length; i++) {
+    console.log(childrens[i]);
+    childrens[i].style.display = "none";
   }
 }
 
@@ -41,10 +50,12 @@ function sprievodca() {
 
 function nahrať() {
   console.log("nahrať function");
+  document.querySelector("#nahratContent").style.display = "block";
 }
 
 function podpora() {
   console.log("podpora function");
+  document.querySelector("#podporaContent").style.display = "block";
 }
 
 function zavrieť() {
@@ -53,12 +64,12 @@ function zavrieť() {
 
 // Content management functions
 
-function manageContent() {
-  clearCon();
+function manageHeaderContent() {
+  clearHeaderCon();
   arrangeBtns();
 }
 
-function clearCon() {
+function clearHeaderCon() {
   //remove all the stuff
   const header = document.querySelector("header");
   //make it hidden so it doesnt mess with layout
