@@ -50,11 +50,11 @@ function manageContent() {
 function clearCon() {
   //remove all the stuff
   const header = document.querySelector("header");
-  header.children[0].style.visibility = "hidden";
   header.children[1].style.visibility = "hidden";
+  header.children[2].style.visibility = "hidden";
 
   //change BG color - CSS animation
-  header.classList.add("blackToGreen");
+  document.querySelector("#secondaryBg").classList.add("blackToGreen");
 }
 
 function arrangeBtns() {

@@ -27,6 +27,27 @@ header {
   background: linear-gradient(90.04deg, #131313 0.03%, #393939 50%, #77c59e 50%, #3a3a3a 99.96%);
   background-size: 200%;
   background-position: left;
+  position: relative;
+}
+
+#secondaryBg {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 20px;
+  background: linear-gradient(90deg, #77c59e 0%, #393939 100%);
+  z-index: 0;
+  opacity: 0;
+}
+
+.blackToGreen {
+  animation: BTGanim 300ms ease-in forwards;
+}
+
+@keyframes BTGanim {
+  100% {
+    opacity: 1;
+  }
 }
 
 #eventInfo {
@@ -60,6 +81,7 @@ h2 {
   grid-template-columns: 1fr 0.8fr 0.9fr;
   gap: 1vw;
   position: relative;
+  opacity: 1;
 }
 
 .btn {
@@ -111,14 +133,4 @@ iframe {
   width: 19vw;
   height: 40.3vw;
   box-shadow: var(--shadow);
-}
-
-.blackToGreen {
-  animation: BTGanim 300ms ease-in forwards;
-}
-
-@keyframes BTGanim {
-  100% {
-    background-position: right;
-  }
 }
