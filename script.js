@@ -54,6 +54,7 @@ function clearCon() {
   header.children[1].style.visibility = "hidden";
 
   //change BG color - CSS animation
+  header.classList.add("blackToGreen");
 }
 
 function arrangeBtns() {
