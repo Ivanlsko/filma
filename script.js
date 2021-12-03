@@ -1,74 +1,68 @@
-const sprievodcaText = [
+/* const sprievodcaText = [
   "prvy subor detailnejsich usmernujucich pokynov pre stredne pokrocilych pouzivatelov",
   "druhy subor detailnejsich usmernujucich pokynov pre stredne pokrocilych pouzivatelov",
   "treti subor detailnejsich usmernujucich pokynov pre stredne pokrocilych pouzivatelov",
   "stvrty subor detailnejsich usmernujucich pokynov pre stredne pokrocilych pouzivatelov",
-];
+]; */
 
-const sprievodcaContent = document.querySelector(".sprievodcaContent");
-let position = 0;
-const next = document.querySelector(".nextPos");
-const back = document.querySelector(".backPos");
-let backIsHidden = false;
-let nextIsHidden = false;
-const btnSprievodca = document.querySelector(".btnSprievodca");
-const sprievodca = document.querySelector(".sprievodca");
-const podpora = document.querySelector(".podpora");
-const btnPodpora = document.querySelector(".btnPodpora");
+const buttons = document.querySelectorAll(".btn");
 
-/*<---------- sprievodca opener--------->*/
+buttons.forEach((button) => {
+  button.addEventListener("click", determineBtn);
+});
 
-btnSprievodca.addEventListener("click", openSprievodca);
-
-function openSprievodca() {
-  if (backIsHidden == false) {
-    back.classList.add("hidden");
-    backIsHidden = true;
+function determineBtn() {
+  //console.log(this);
+  if (this.innerText == "sprievodca") {
+    sprievodca();
+    manageContent();
   }
-  sprievodca.classList.toggle("hidden");
-  document.querySelector("#pos0").classList.toggle("positionFull");
-}
 
-/*<---------- slideshow --------->*/
-
-sprievodcaContent.textContent = sprievodcaText[position];
-
-next.addEventListener("click", nextPos);
-back.addEventListener("click", backPos);
-function nextPos() {
-  sprievodcaContent.textContent = sprievodcaText[position + 1];
-  document.querySelector("#pos" + position).classList.remove("positionFull");
-  position = position + 1;
-  document.querySelector("#pos" + position).classList.add("positionFull");
-  if (position > 0) {
-    back.classList.remove("hidden");
+  if (this.innerText == "nahrať") {
+    nahrať();
   }
-  if (position == 3) {
-    next.classList.add("hidden");
-    nextIsHidden = true;
+
+  if (this.innerText == "podpora") {
+    podpora();
   }
 }
 
-function backPos() {
-  sprievodcaContent.textContent = sprievodcaText[position - 1];
-  document.querySelector("#pos" + position).classList.remove("positionFull");
-  position = position - 1;
-  document.querySelector("#pos" + position).classList.add("positionFull");
-  if (position == 0) {
-    back.classList.add("hidden");
-    backIsHidden = true;
-  }
-
-  if (nextIsHidden == true) {
-    next.classList.remove("hidden");
-    nextIsHidden = false;
-  }
+// Buttons functions
+function sprievodca() {
+  console.log("sprievodca function");
 }
 
-/*<---------- podpora opener--------->*/
+function nahrať() {
+  console.log("nahrať function");
+}
 
-btnPodpora.addEventListener("click", openPodpora);
+function podpora() {
+  console.log("podpora function");
+}
 
-function openPodpora() {
-  podpora.classList.toggle("hidden");
+// Content management functions
+
+function manageContent() {
+  clearCon();
+  arrangeBtns();
+}
+
+function clearCon() {
+  //remove all the stuff
+  const header = document.querySelector("header");
+  header.children[0].style.visibility = "hidden";
+  header.children[1].style.visibility = "hidden";
+
+  //change BG color - CSS animation
+}
+
+function arrangeBtns() {
+  //arange the btns (use absolute on btn and margin-left: -30vw on #buttons)
+
+  //after arranging the buttons show to the close button
+  setTimeout(showCloseBtn, 3000);
+}
+
+function showCloseBtn() {
+  console.log("currentEnd");
 }
