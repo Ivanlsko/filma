@@ -1,19 +1,16 @@
-/* const sprievodcaText = [
-  "prvy subor detailnejsich usmernujucich pokynov pre stredne pokrocilych pouzivatelov",
-  "druhy subor detailnejsich usmernujucich pokynov pre stredne pokrocilych pouzivatelov",
-  "treti subor detailnejsich usmernujucich pokynov pre stredne pokrocilych pouzivatelov",
-  "stvrty subor detailnejsich usmernujucich pokynov pre stredne pokrocilych pouzivatelov",
-]; */
-
 const buttons = document.querySelectorAll(".btn");
+const header = document.querySelector("header");
 
 buttons.forEach((button) => {
   button.addEventListener("click", determineBtn);
 });
 
 function determineBtn() {
+  if (this.innerText == "zavrieť") {
+    zavrieť();
+    return;
+  }
   secHeaderContentDisplayNone();
-
   console.log(this.innerText);
   if (this.innerText == "sprievodca") {
     sprievodca();
@@ -28,9 +25,6 @@ function determineBtn() {
     podpora();
   }
 
-  if (this.innerText == "zavrieť") {
-    zavrieť();
-  }
   manageHeaderContent();
 }
 
@@ -45,7 +39,49 @@ function secHeaderContentDisplayNone() {
 
 // Buttons functions
 function sprievodca() {
+  const sprievodcaText = [
+    "prvy subor detailnejsich usmernujucich pokynov pre stredne pokrocilych pouzivatelov",
+    "druhy subor detailnejsich usmernujucich pokynov pre stredne pokrocilych pouzivatelov",
+    "treti subor detailnejsich usmernujucich pokynov pre stredne pokrocilych pouzivatelov",
+    "stvrty subor detailnejsich usmernujucich pokynov pre stredne pokrocilych pouzivatelov",
+  ];
   console.log("sprievodca function");
+  //display grid to allow further formating
+  document.querySelector("#sprievodcaContent").style.display = "grid";
+  const textHolder = document.querySelector("#sprievodcaText");
+  //Slider
+  let currentPos = 0;
+  const positions = document.querySelectorAll(".position");
+  textHolder.innerHTML = sprievodcaText[currentPos];
+  document.querySelector("#back").style.visibility = "hidden";
+
+  //Back
+  document.querySelector("#back").addEventListener("click", () => {
+    positions[currentPos].classList.toggle("filled");
+    currentPos--;
+    positions[currentPos].classList.toggle("filled");
+    textHolder.innerHTML = sprievodcaText[currentPos];
+    if (currentPos < 1) {
+      document.querySelector("#back").style.visibility = "hidden";
+    }
+    if (currentPos < 2) {
+      document.querySelector("#next").style.visibility = "unset";
+    }
+  });
+
+  //Next
+  document.querySelector("#next").addEventListener("click", () => {
+    positions[currentPos].classList.toggle("filled");
+    currentPos++;
+    positions[currentPos].classList.toggle("filled");
+    textHolder.innerHTML = sprievodcaText[currentPos];
+    if (currentPos > 2) {
+      document.querySelector("#next").style.visibility = "hidden";
+    }
+    if (currentPos > 0) {
+      document.querySelector("#back").style.visibility = "unset";
+    }
+  });
 }
 
 function nahrať() {
@@ -59,19 +95,33 @@ function podpora() {
 }
 
 function zavrieť() {
-  console.log("podpora function");
+  console.log("zavriet function");
+  document.querySelector("#secondaryBg").classList.remove("blackToGreen");
+  document.querySelector(".btnZavriet").classList.remove("opacityOne");
+
+  header.children[1].style.visibility = "visible";
+  header.children[2].style.visibility = "visible";
+  header.children[3].style.visibility = "visible";
+  header.children[1].style.display = "block";
+  header.children[2].style.display = "block";
+  header.children[3].style.display = "grid";
+  document.querySelector(".btnSprievodca").classList.remove("rightToLeftSprievodca");
+  document.querySelector(".btnNahrat").classList.remove("rightToLeftNahrat");
 }
 
 // Content management functions
 
 function manageHeaderContent() {
+  console.log("manageHeaderContent");
   clearHeaderCon();
   arrangeBtns();
 }
 
 function clearHeaderCon() {
+  console.log("clearHeaderCon");
+
   //remove all the stuff
-  const header = document.querySelector("header");
+
   //make it hidden so it doesnt mess with layout
   header.children[1].style.visibility = "hidden";
   header.children[2].style.visibility = "hidden";
