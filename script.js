@@ -41,7 +41,7 @@ function secHeaderContentDisplayNone() {
 function sprievodca() {
   const sprievodcaText = [
     "prvy subor detailnejsich usmernujucich pokynov pre stredne pokrocilych pouzivatelov",
-    "druhy subor detailnejsich usmernujucich pokynov pre stredne pokrocilych pouzivatelov",
+    "druhy subor usmernujucich pokynov pre pokrocilych pouzivatelov",
     "treti subor detailnejsich usmernujucich pokynov pre stredne pokrocilych pouzivatelov",
     "stvrty subor detailnejsich usmernujucich pokynov pre stredne pokrocilych pouzivatelov",
   ];

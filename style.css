@@ -12,6 +12,7 @@ html {
 }
 body {
   margin: 2vw 2.847vw;
+  max-width: 1440px;
 }
 /*Header*/ /*Header*/ /*Header*/ /*Header*/
 
@@ -179,6 +180,7 @@ h3 {
 
 .arrows {
   width: 0.6vw;
+  padding: 2vw;
 }
 
 a {
@@ -188,7 +190,7 @@ a {
 
 #sprievodcaContent {
   display: grid;
-  grid-template-columns: 0.8fr 2fr 0.8fr;
+  grid-template-columns: 0.8fr 50vw 0.8fr;
   grid-template-rows: auto auto;
   align-items: center;
   justify-items: center;
@@ -197,6 +199,7 @@ a {
 
 #positions {
   display: flex;
+  margin-top: -1vw;
   grid-row: 2;
   grid-column-start: 2;
   justify-self: center;
@@ -241,4 +244,7 @@ iframe {
   width: 19vw;
   height: 40.3vw;
   box-shadow: var(--shadow);
+}
+
+@media queries from( max-width: 1440px) {
 }
