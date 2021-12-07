@@ -12,7 +12,8 @@ html {
 }
 body {
   margin: 2vw 2.847vw;
-  max-width: 1440px;
+  /*   max-width: 1440px;
+ */
 }
 /*Header*/ /*Header*/ /*Header*/ /*Header*/
 
@@ -246,5 +247,8 @@ iframe {
   box-shadow: var(--shadow);
 }
 
-@media queries from( max-width: 1440px) {
+@media screen and (min-width: 1440px) {
+  /* body {
+    background: yellow;
+  } */
 }

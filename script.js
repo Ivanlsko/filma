@@ -1,6 +1,26 @@
 const buttons = document.querySelectorAll(".btn");
 const header = document.querySelector("header");
 
+/* let vHeight = window.innerHeight;
+console.log(vHeight);
+let vWidth = `(${vHeight} / 9) * 16`;
+console.log(vWidth); */
+
+window.addEventListener("DOMContentLoaded", init);
+
+function init() {
+  let height = window.innerHeight;
+  let width = window.innerWidth;
+  console.log(height, width);
+  window.addEventListener("resize", () => {
+    height = window.innerHeight;
+    width = window.innerWidth;
+    console.log(height, width);
+  });
+}
+
+/* document.querySelector("#frameCall").style.width = `(${vHeight} / 9) * 16`;
+ */
 buttons.forEach((button) => {
   button.addEventListener("click", determineBtn);
 });
